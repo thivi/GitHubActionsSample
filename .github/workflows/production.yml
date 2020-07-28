@@ -25,23 +25,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         
-    - name: Build Project 
-      run:  |
-        npm ci
-        npm run build --if-present
-
-    - name: Install Firebase CLI
-      env:
-        FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}} 
-      run: |
-        sudo npm install -g firebase-tools
-        firebase target:apply hosting production github-actions-firebase-sample
-        firebase deploy --token $FIREBASE_TOKEN --only hosting:production --non-interactive
-        
     - name: Version Bumping
       run:  |
          git config --global user.email "version.bumping@email.com"
          git config --global user.name "Version Bumping"
+         git remote update
          git fetch
          git checkout origin/master
          npm version minor
