@@ -42,7 +42,8 @@ jobs:
       run:  |
          git config --global user.email "version.bumping@email.com"
          git config --global user.name "Version Bumping"
-         git push origin HEAD:master
+         git checkout origin/master
+         git push
          npm version minor
          git push
       if: github.event.action=='released'
