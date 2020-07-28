@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "github-actions-firebase-sample"
+  },
+  "targets": {
+    "github-actions-firebase-sample": {
+      "hosting": {
+        "staging": [
+          "staging-github-actions"
+        ],
+        "production": [
+          "github-actions-firebase-sample"
+        ]
+      }
+    }
   }
 }

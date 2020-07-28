@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Production
 
 on:
   release:
@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [10.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -26,7 +26,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
         
     - name: Build Project 
-      run: npm run build --if-present
+      run:  |
+        npm ci
+        npm run build --if-present
 
     - name: Install Firebase CLI
       env:
@@ -37,9 +39,12 @@ jobs:
         firebase deploy --token $FIREBASE_TOKEN --only hosting:production --non-interactive
         
     - name: Version Bumping
-       run:|
+      run:  |
          git config --global user.email "version.bumping@email.com"
          git config --global user.name "Version Bumping"
+         git remote update
+         git fetch
+         git checkout --progress --force -B master refs/remotes/origin/master
          npm version minor
          git push
       if: github.event.action=='released'
