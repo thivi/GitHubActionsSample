@@ -41,7 +41,7 @@ jobs:
         FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
       run: |
         sudo npm install -g firebase-tools
-        firebase target:apply hosting staging staging-github-actiosn-firebase-sample
+        firebase target:apply hosting staging staging-github-actions
         firebase deploy --token $FIREBASE_TOKEN --only hosting:staging --non-interactive 
         
     - name: Version Bumping
