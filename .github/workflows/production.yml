@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Production
 
 on:
   release:
@@ -37,7 +37,7 @@ jobs:
         firebase deploy --token $FIREBASE_TOKEN --only hosting:production --non-interactive
         
     - name: Version Bumping
-       run:|
+      run:  |
          git config --global user.email "version.bumping@email.com"
          git config --global user.name "Version Bumping"
          npm version minor
