@@ -44,7 +44,6 @@ jobs:
          git config --global user.name "Version Bumping"
          git fetch
          git checkout origin/master
-         git push
          npm version minor
          git push
       if: github.event.action=='released'
