@@ -31,7 +31,7 @@ jobs:
          git config --global user.name "Version Bumping"
          git remote update
          git fetch
-         git switch origin/master
+         git checkout --progress --force -B master refs/remotes/origin/master
          npm version minor
          git push
       if: github.event.action=='released'
