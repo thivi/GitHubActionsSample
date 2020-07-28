@@ -42,7 +42,6 @@ jobs:
       run:  |
          git config --global user.email "version.bumping@email.com"
          git config --global user.name "Version Bumping"
-         git checkout master
          npm version minor
          git push
       if: github.event.action=='released'
